@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title="星辰科技 - 数字化转型合作伙伴">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232563eb'/%3E%3Cpath d='M8 16l6-6 4 4 6-6v14H8z' fill='white'/%3E%3C/svg%3E">
+<style>
+:root{
+  --primary:#1e40af;
+  --primary-light:#3b82f6;
+  --accent:#f97316;
+  --dark:#0f172a;
+  --text:#334155;
+  --muted:#64748b;
+  --bg:#ffffff;
+  --bg-soft:#f1f5f9;
+  --border:#e2e8f0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--text);line-height:1.6;background:var(--bg);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ===== 导航 ===== */
+.nav{
+  position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;color:var(--dark)}
+.logo-mark{
+  width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  display:grid;place-items:center;color:#fff;font-size:18px;font-weight:800;
+}
+.nav-links{display:flex;gap:8px;list-style:none}
+.nav-links a{
+  padding:8px 16px;border-radius:6px;font-size:15px;color:var(--text);
+  transition:.2s;cursor:pointer;
+}
+.nav-links a:hover{background:var(--bg-soft);color:var(--primary)}
+.nav-links a.active{color:var(--primary);font-weight:600;background:#eff6ff}
+.nav-cta{
+  background:var(--primary);color:#fff;padding:10px 22px;border-radius:6px;
+  font-size:14px;font-weight:500;cursor:pointer;border:none;transition:.2s;
+}
+.nav-cta:hover{background:#1e3a8a}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.burger span{width:24px;height:2px;background:var(--dark);transition:.2s}
+
+/* ===== 视图切换 ===== */
+.view{display:none}
+.view.active{display:block}
+
+/* ===== Hero ===== */
+.hero{
+  background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);
+  color:#fff;padding:100px 0 120px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;right:-100px;top:-100px;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(59,130,246,.3),transparent 70%);border-radius:50%;
+}
+.hero-inner{position:relative;max-width:720px}
+.hero-tag{
+  display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  padding:6px 14px;border-radius:20px;font-size:13px;margin-bottom:24px;
+}
+.hero h1{font-size:48px;line-height:1.2;font-weight:800;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:#60a5fa}
+.hero p{font-size:18px;color:#cbd5e1;margin-bottom:36px;max-width:560px}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;border:none;
+  transition:.2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#ea580c}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+
+/* ===== 通用区块 ===== */
+.section{padding:80px 0}
+.section-head{text-align:center;max-width:640px;margin:0 auto 56px}
+.section-tag{color:var(--primary);font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.section-head h2{font-size:36px;color:var(--dark);margin:12px 0 16px;font-weight:800}
+.section-head p{color:var(--muted);font-size:16px}
+
+/* 优势卡片 */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{
+  background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px 28px;
+  transition:.25s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,23,42,.08);border-color:transparent}
+.card-icon{
+  width:48px;height:48px;border-radius:10px;background:#eff6ff;color:var(--primary);
+  display:grid;place-items:center;font-size:22px;margin-bottom:20px;
+}
+.card h3{font-size:18px;color:var(--dark);margin-bottom:10px}
+.card p{color:var(--muted);font-size:14px;line-height:1.7}
+
+/* 数据统计 */
+.stats{background:var(--bg-soft);padding:60px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-num{font-size:40px;font-weight:800;color:var(--primary)}
+.stat-label{color:var(--muted);font-size:14px;margin-top:4px}
+
+/* 新闻 */
+.news-item{
+  display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--border);cursor:pointer;align-items:flex-start;
+}
+.news-item:hover .news-title{color:var(--primary)}
+.news-date{
+  flex-shrink:0;width:80px;text-align:center;background:var(--bg-soft);border-radius:8px;padding:10px;
+}
+.news-date .day{font-size:24px;font-weight:800;color:var(--dark);line-height:1}
+.news-date .month{font-size:12px;color:var(--muted);margin-top:4px}
+.news-title{font-size:17px;color:var(--dark);font-weight:600;margin-bottom:6px;transition:.2s}
+.news-summary{color:var(--muted);font-size:14px}
+.news-cat{
+  display:inline-block;background:#fef3c7;color:#92400e;font-size:12px;
+  padding:2px 10px;border-radius:4px;margin-bottom:8px;
+}
+
+/* 产品 */
+.product-card{overflow:hidden;padding:0}
+.product-cover{height:180px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:grid;place-items:center;color:#fff;font-size:48px}
+.product-cover.c2{background:linear-gradient(135deg,#f97316,#ef4444)}
+.product-cover.c3{background:linear-gradient(135deg,#10b981,#06b6d4)}
+.product-cover.c4{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
+.product-body{padding:24px}
+.product-body h3{font-size:18px;color:var(--dark);margin-bottom:8px}
+.product-body p{font-size:14px;color:var(--muted)}
+.product-tags{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:12px;background:var(--bg-soft);padding:4px 10px;border-radius:4px;color:var(--muted)}
+
+/* 招聘 */
+.job-item{
+  background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px 28px;
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;
+}
+.job-info h3{font-size:17px;color:var(--dark);margin-bottom:6px}
+.job-meta{display:flex;gap:16px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+.job-salary{color:var(--accent);font-weight:700;font-size:16px}
+.job-btn{
+  background:var(--bg-soft);color:var(--primary);padding:10px 20px;border-radius:6px;
+  font-size:14px;font-weight:500;cursor:pointer;border:none;transition:.2s;flex-shrink:0;margin-left:20px;
+}
+.job-btn:hover{background:var(--primary);color:#fff}
+
+/* 联系 */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:48px}
+.contact-info h3{font-size:20px;color:var(--dark);margin-bottom:20px}
+.contact-line{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start}
+.contact-line .ic{
+  width:40px;height:40px;border-radius:8px;background:#eff6ff;color:var(--primary);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.contact-line .lbl{font-size:13px;color:var(--muted)}
+.contact-line .val{font-size:15px;color:var(--dark);font-weight:500}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:14px;color:var(--dark);margin-bottom:6px;font-weight:500}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;
+  font-size:16px;font-family:inherit;background:#fff;transition:.2s;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* 关于页 */
+.about-hero{background:var(--bg-soft);padding:60px 0}
+.about-hero h1{font-size:36px;color:var(--dark);margin-bottom:12px}
+.about-hero p{color:var(--muted);font-size:16px;max-width:720px}
+.timeline{position:relative;max-width:800px;margin:0 auto;padding-left:30px}
+.timeline::before{
+  content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border);
+}
+.tl-item{position:relative;padding-bottom:36px}
+.tl-item::before{
+  content:"";position:absolute;left:-28px;top:6px;width:14px;height:14px;border-radius:50%;
+  background:var(--primary);border:3px solid #fff;box-shadow:0 0 0 2px var(--primary);
+}
+.tl-year{font-size:14px;color:var(--primary);font-weight:700}
+.tl-item h4{font-size:17px;color:var(--dark);margin:4px 0}
+.tl-item p{color:var(--muted);font-size:14px}
+
+/* ===== Footer ===== */
+.footer{background:var(--dark);color:#94a3b8;padding:60px 0 24px;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer h4{color:#fff;font-size:15px;margin-bottom:16px}
+.footer ul{list-style:none}
+.footer li{margin-bottom:10px;font-size:14px;cursor:pointer;transition:.2s}
+.footer li:hover{color:#fff}
+.footer-brand p{font-size:14px;line-height:1.7;margin-top:12px;max-width:280px}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;font-size:13px;
+}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--dark);color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;
+  opacity:0;transition:.3s;z-index:999;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== 响应式 ===== */
+@media (max-width:768px){
+  .nav-links{
+    display:none;position:absolute;top:72px;left:0;right:0;background:#fff;
+    flex-direction:column;padding:16px;border-bottom:1px solid var(--border);
+  }
+  .nav-links.open{display:flex}
+  .burger{display:flex}
+  .nav-cta{display:none}
+  .hero{padding:60px 0 80px}
+  .hero h1{font-size:32px}
+  .hero p{font-size:16px}
+  .grid-3,.grid-4{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .section{padding:56px 0}
+  .section-head h2{font-size:26px}
+  .contact-wrap{grid-template-columns:1fr;gap:32px}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
+  .job-item{flex-direction:column;align-items:flex-start}
+  .job-btn{margin-left:0;margin-top:12px}
+  .news-item{flex-direction:column}
+  .news-date{width:100%;display:flex;justify-content:center;gap:8px;padding:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 导航 ===== -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="logo">
+      <div class="logo-mark">星</div>
+      <span>星辰科技</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a data-route="home" class="active">首页</a></li>
+      <li><a data-route="about">关于我们</a></li>
+      <li><a data-route="news">新闻资讯</a></li>
+      <li><a data-route="products">产品介绍</a></li>
+      <li><a data-route="jobs">人才招聘</a></li>
+      <li><a data-route="contact">联系我们</a></li>
+    </ul>
+    <button class="nav-cta" onclick="navigate('contact')">免费咨询</button>
+    <button class="burger" id="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ===== 视图：首页 ===== -->
+<section class="view active" id="view-home">
+  <div class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-tag">数字化转型 · 行业领先解决方案</div>
+        <h1>以技术驱动创新<br>助力企业<em>数字化未来</em></h1>
+        <p>星辰科技专注于云计算、大数据与人工智能领域，为各行业客户提供稳定、安全、高效的一站式数字化解决方案。</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="navigate('products')">查看产品</button>
+          <button class="btn btn-ghost" onclick="navigate('about')">了解我们</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">核心优势</div>
+        <h2>为什么选择星辰科技</h2>
+        <p>十余年技术沉淀，服务超过 500 家企业客户，用可靠技术陪伴每一次业务增长。</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <h3>技术领先</h3>
+          <p>核心研发团队来自一线互联网公司，拥有 50+ 项自主知识产权与发明专利。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>安全可靠</h3>
+          <p>通过 ISO27001、等保三级等权威认证，99.99% 可用性 SLA 保障业务连续。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>专属服务</h3>
+          <p>7×24 小时专属客户成功团队，从方案咨询到落地运维全程陪伴。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div><div class="stat-num">12+</div><div class="stat-label">年行业经验</div></div>
+        <div><div class="stat-num">500+</div><div class="stat-label">企业客户</div></div>
+        <div><div class="stat-num">30+</div><div class="stat-label">行业覆盖</div></div>
+        <div><div class="stat-num">99.99%</div><div class="stat-label">系统可用性</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">新闻动态</div>
+        <h2>最新资讯</h2>
+      </div>
+      <div id="homeNews"></div>
+      <div style="text-align:center;margin-top:32px">
+        <button class="btn btn-ghost" style="color:var(--primary);border-color:var(--primary)" onclick="navigate('news')">查看全部新闻</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 视图占位，后续分批写入 -->
+<!-- ===== 视图：关于我们 ===== -->
+<section class="view" id="view-about">
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-tag">About Us</div>
+      <h1>关于星辰科技</h1>
+      <p>星辰科技成立于 2014 年，是一家以云计算、大数据和人工智能为核心技术的国家高新技术企业。我们相信，技术的价值在于解决真实的业务问题——过去十二年，我们陪伴 500+ 家企业完成数字化转型，让每一次业务决策都有数据可依、有技术可托。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">发展历程</div>
+        <h2>从 0 到行业领先</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">2014</div>
+          <h4>公司成立</h4>
+          <p>三位创始人在中关村一间 30㎡ 的办公室写下第一行代码，从定制化软件项目起步。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2017</div>
+          <h4>推出第一代云平台</h4>
+          <p>星辰云平台 1.0 正式发布，首批服务 30 家企业客户，完成 A 轮融资。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2019</div>
+          <h4>大数据中台上线</h4>
+          <p>数智中台产品发布，进入金融、制造两大核心行业，客户数突破 100 家。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2022</div>
+          <h4>AI 实验室成立</h4>
+          <p>组建百人 AI 团队，启动大模型研发，完成 C 轮融资，员工规模突破 500 人。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2024</div>
+          <h4>「星语」大模型发布</h4>
+          <p>自研企业级大模型「星语」通过国家备案，服务客户超过 500 家，覆盖 30+ 行业。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2026</div>
+          <h4>云原生平台 3.0</h4>
+          <p>发布新一代云原生平台，助力企业基础设施成本平均降低 40%。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:var(--bg-soft)">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">企业文化</div>
+        <h2>我们相信什么</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <h3>客户第一</h3>
+          <p>客户的业务成功是我们存在的唯一理由，所有技术决策都从客户真实场景出发。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>务实敢为</h3>
+          <p>不追风口、不讲故事，用可量化的结果说话，把每一个交付细节做到极致。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+          <h3>长期主义</h3>
+          <p>坚持做难而正确的事，用十年的技术沉淀换客户十年的业务增长。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== 视图：新闻资讯 ===== -->
+<section class="view" id="view-news">
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-tag">News</div>
+      <h1>新闻资讯</h1>
+      <p>了解星辰科技最新动态、产品发布与行业洞察。</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div id="allNews"></div>
+    </div>
+  </div>
+</section>
+<!-- ===== 视图：产品介绍 ===== -->
+<section class="view" id="view-products">
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-tag">Products</div>
+      <h1>产品与服务</h1>
+      <p>从基础设施到智能应用，覆盖企业数字化全链路。</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="grid-4" id="productGrid"></div>
+    </div>
+  </div>
+  <div class="section" style="background:var(--bg-soft)">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">解决方案</div>
+        <h2>深耕行业，落地为王</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+          <h3>金融行业</h3>
+          <p>为银行、保险、证券提供智能风控、实时反欺诈、监管报送一体化方案。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6m11-11h-6m-10 0H1m15.5-7.5l-4.24 4.24m-6.52 6.52l-4.24 4.24m0-15l4.24 4.24m6.52 6.52l4.24 4.24"/></svg></div>
+          <h3>智能制造</h3>
+          <p>工业物联网平台 + 数字孪生，打通生产、供应链、质检全链路数据。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+          <h3>零售消费</h3>
+          <p>全渠道用户数据中台 + 智能推荐，提升复购率与运营效率。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：人才招聘 ===== -->
+<section class="view" id="view-jobs">
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-tag">Careers</div>
+      <h1>加入我们</h1>
+      <p>和一群聪明、务实的人一起，做有长期价值的事。我们提供有竞争力的薪酬、弹性工作制、全员持股计划与持续学习预算。</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-tag">Benefits</div>
+        <h2>你将获得</h2>
+      </div>
+      <div class="grid-4" style="margin-bottom:48px">
+        <div class="card" style="text-align:center">
+          <div class="card-icon" style="margin:0 auto 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>有竞争力薪酬</h3>
+          <p>14-16 薪 + 年终奖</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div class="card-icon" style="margin:0 auto 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <h3>弹性办公</h3>
+          <p>远程 / 坐班自由选择</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div class="card-icon" style="margin:0 auto 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <h3>学习成长</h3>
+          <p>每年 1 万元学习预算</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <div class="card-icon" style="margin:0 auto 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+          <h3>全员持股</h3>
+          <p>核心员工股权激励</p>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-bottom:32px">
+        <div class="section-tag">Open Positions</div>
+        <h2 style="font-size:28px">在招职位</h2>
+      </div>
+      <div id="jobList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：联系我们 ===== -->
+<section class="view" id="view-contact">
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-tag">Contact</div>
+      <h1>联系我们</h1>
+      <p>无论是产品咨询、商务合作还是技术交流，都欢迎随时与我们取得联系。</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="contact-wrap">
+        <div>
+          <h3>联系方式</h3>
+          <div class="contact-line">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><div class="lbl">咨询热线</div><div class="val">400-888-0000（工作日 9:00-18:00）</div></div>
+          </div>
+          <div class="contact-line">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="lbl">商务邮箱</div><div class="val">contact@startech.com</div></div>
+          </div>
+          <div class="contact-line">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="lbl">公司地址</div><div class="val">北京市海淀区中关村软件园 星辰大厦 18F</div></div>
+          </div>
+          <div class="contact-line">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="lbl">办公时间</div><div class="val">周一至周五 9:00 - 18:30</div></div>
+          </div>
+
+          <h3 style="margin-top:36px">分支机构</h3>
+          <div class="contact-line">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div><div class="lbl">上海分公司</div><div class="val">浦东新区张江高科技园区</div></div>
+          </div>
+          <div class="contact-line">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div><div class="lbl">深圳分公司</div><div class="val">南山区科技园南区</div></div>
+          </div>
+        </div>
+
+        <div>
+          <form onsubmit="submitForm(this)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>您的姓名 *</label>
+                <input required placeholder="请输入姓名">
+              </div>
+              <div class="form-group">
+                <label>联系电话 *</label>
+                <input required placeholder="请输入手机号">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>公司名称</label>
+                <input placeholder="请输入公司名称">
+              </div>
+              <div class="form-group">
+                <label>咨询类型</label>
+                <select>
+                  <option>产品咨询</option>
+                  <option>商务合作</option>
+                  <option>技术支持</option>
+                  <option>加入我们</option>
+                  <option>其他</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>留言内容 *</label>
+              <textarea rows="5" required placeholder="请简单描述您的需求或问题……"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">提交咨询</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff">
+          <div class="logo-mark">星</div>
+          <span>星辰科技</span>
+        </div>
+        <p>致力于成为企业最可信赖的数字化转型伙伴，用技术创造长期价值。</p>
+      </div>
+      <div>
+        <h4>快速导航</h4>
+        <ul>
+          <li onclick="navigate('home')">首页</li>
+          <li onclick="navigate('about')">关于我们</li>
+          <li onclick="navigate('products')">产品介绍</li>
+          <li onclick="navigate('jobs')">人才招聘</li>
+        </ul>
+      </div>
+      <div>
+        <h4>产品服务</h4>
+        <ul>
+          <li onclick="navigate('products')">云平台</li>
+          <li onclick="navigate('products')">大数据中台</li>
+          <li onclick="navigate('products')">AI 智能助手</li>
+          <li onclick="navigate('products')">安全防护</li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系方式</h4>
+        <ul>
+          <li onclick="navigate('contact')">400-888-0000</li>
+          <li onclick="navigate('contact')">contact@startech.com</li>
+          <li onclick="navigate('contact')">北京市海淀区中关村</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 星辰科技有限公司 · 京ICP备00000000号</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== 数据 =====
+const NEWS = [
+  {cat:"公司新闻", title:"星辰科技发布新一代云原生平台 3.0，助力企业降本 40%", summary:"全新版本在弹性伸缩、多集群调度与成本优化上实现重大突破，已服务超过 100 家头部企业。", day:"15", month:"2026.10"},
+  {cat:"产品动态", title:"AI 智能助手「星语」通过国家生成式 AI 服务备案", summary:"「星语」在企业知识库问答、智能客服、文档生成三大场景全面升级，准确率提升至 95%。", day:"08", month:"2026.10"},
+  {cat:"行业洞察", title:"星辰科技入选「2026 中国企业服务行业 TOP 50」榜单", summary:"凭借在金融、制造、零售三大行业的落地实践，公司连续三年获评行业领先厂商。", day:"22", month:"2026.09"},
+  {cat:"公司新闻", title:"与某国有银行达成战略合作，共建金融科技联合实验室", summary:"双方将在智能风控、反欺诈、大模型应用等领域展开深度技术合作。", day:"10", month:"2026.09"},
+  {cat:"产品动态", title:"大数据中台新增实时数仓能力，秒级响应亿级数据查询", summary:"新一代实时计算引擎将查询延迟从分钟级缩短至亚秒级，支撑业务实时决策。", day:"28", month:"2026.08"},
+];
+
+const PRODUCTS = [
+  {name:"星辰云平台", desc:"一站式企业级云计算平台，提供弹性计算、容器、存储与网络服务，轻松承载核心业务。", tags:["弹性计算","容器服务","混合云"], cls:""},
+  {name:"星语 AI 助手", desc:"基于大模型的企业智能助手，覆盖知识问答、智能客服、文档生成、代码辅助等场景。", tags:["大模型","知识库","智能客服"], cls:"c2"},
+  {name:"数智中台", desc:"整合数据采集、治理、分析与应用的全链路大数据平台，让数据资产真正驱动业务。", tags:["数据仓库","实时计算","BI 分析"], cls:"c3"},
+  {name:"安全盾", desc:"全方位企业安全解决方案，覆盖 Web 防护、主机安全、数据加密与合规审计。", tags:["WAF","零信任","合规审计"], cls:"c4"},
+];
+
+const JOBS = [
+  {title:"高级前端工程师", dept:"研发中心", loc:"北京", exp:"3-5年", edu:"本科及以上", salary:"25-40K"},
+  {title:"后端架构师", dept:"研发中心", loc:"北京/上海", exp:"5年以上", edu:"本科及以上", salary:"35-60K"},
+  {title:"大模型算法工程师", dept:"AI 实验室", loc:"北京", exp:"3年以上", edu:"硕士及以上", salary:"30-55K"},
+  {title:"资深产品经理", dept:"产品部", loc:"北京", exp:"5年以上", edu:"本科及以上", salary:"25-45K"},
+  {title:"客户成功经理", dept:"客户部", loc:"上海/深圳", exp:"2-5年", edu:"本科及以上", salary:"15-25K"},
+  {title:"UI/UX 设计师", dept:"设计部", loc:"远程优先", exp:"3年以上", edu:"本科及以上", salary:"18-30K"},
+];
+
+// ===== 路由 =====
+const routes = {home:"首页", about:"关于我们", news:"新闻资讯", products:"产品介绍", jobs:"人才招聘", contact:"联系我们"};
+
+function navigate(route){
+  if(!routes[route]) route = "home";
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById("view-"+route).classList.add("active");
+  document.querySelectorAll(".nav-links a").forEach(a=>{
+    a.classList.toggle("active", a.dataset.route===route);
+  });
+  document.getElementById("navLinks").classList.remove("open");
+  window.scrollTo({top:0,behavior:"auto"});
+  document.title = "星辰科技 - " + routes[route];
+  if(location.hash !== "#"+route) history.replaceState(null,"","#"+route);
+}
+
+document.querySelectorAll(".nav-links a").forEach(a=>{
+  a.addEventListener("click",()=>navigate(a.dataset.route));
+});
+
+document.getElementById("burger").addEventListener("click",()=>{
+  document.getElementById("navLinks").classList.toggle("open");
+});
+
+// 初始化 hash 路由
+const initRoute = (location.hash||"#home").replace("#","");
+if(routes[initRoute]) navigate(initRoute);
+
+// ===== 渲染首页新闻 =====
+function renderHomeNews(){
+  const el = document.getElementById("homeNews");
+  el.innerHTML = NEWS.slice(0,3).map(n=>`
+    <div class="news-item" onclick="navigate('news')">
+      <div class="news-date"><div class="day">${n.day}</div><div class="month">${n.month}</div></div>
+      <div>
+        <span class="news-cat">${n.cat}</span>
+        <div class="news-title">${n.title}</div>
+        <div class="news-summary">${n.summary}</div>
+      </div>
+    </div>`).join("");
+}
+renderHomeNews();
+
+// ===== 渲染全部新闻 =====
+function renderAllNews(){
+  document.getElementById("allNews").innerHTML = NEWS.map(n=>`
+    <div class="news-item">
+      <div class="news-date"><div class="day">${n.day}</div><div class="month">${n.month}</div></div>
+      <div style="flex:1">
+        <span class="news-cat">${n.cat}</span>
+        <div class="news-title">${n.title}</div>
+        <div class="news-summary">${n.summary}</div>
+      </div>
+    </div>`).join("");
+}
+renderAllNews();
+
+// ===== 渲染产品 =====
+document.getElementById("productGrid").innerHTML = PRODUCTS.map(p=>`
+  <div class="card product-card">
+    <div class="product-cover ${p.cls}">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+    </div>
+    <div class="product-body">
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <div class="product-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+    </div>
+  </div>`).join("");
+
+// ===== 渲染职位 =====
+document.getElementById("jobList").innerHTML = JOBS.map(j=>`
+  <div class="job-item">
+    <div class="job-info">
+      <h3>${j.title}</h3>
+      <div class="job-meta">
+        <span>${j.dept}</span>
+        <span>${j.loc}</span>
+        <span>${j.exp}</span>
+        <span>${j.edu}</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center">
+      <span class="job-salary">${j.salary}</span>
+      <button class="job-btn" onclick="toast('已收到您的应聘意向，HR 将尽快联系您')">立即投递</button>
+    </div>
+  </div>`).join("");
+
+// ===== Toast =====
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"),2200);
+}
+
+// 联系表单
+function submitForm(e){
+  e.preventDefault();
+  toast("提交成功，我们将在 1 个工作日内与您联系！");
+  e.target.reset();
+}
+</script>
+</body>
+</html>
